@@ -2,7 +2,13 @@
 node_modules
 /dist
 
+# Generated data files
+/src/president.json
+/src/senate.json
+/src/house.json
+
 # local env files
+.env
 .env.local
 .env.*.local
 
