@@ -1,6 +1,7 @@
 <template>
   <div class="home">
     <h1>Vote UBI</h1>
+    <p>Some text about Vote UBI</p>
     <form
       class="district-chooser"
       @submit="
@@ -20,7 +21,7 @@
         v-model="formDistrict"
         placeholder="District number"
       />
-      <button>Go</button>
+      <button type="submit">Go →</button>
     </form>
   </div>
 </template>
@@ -47,16 +48,20 @@ export default {
   },
   methods: {
     goToDistrict() {
-      this.$router.push({
-        name: "DistrictPage",
-        params: {
-          stateAndDistrict: formatDistrict(
-            this.formState.abbreviation,
-            this.formDistrict
-          ),
-          runningFor: "house"
-        }
-      });
+      if (!this.formState.abbreviation || !this.formDistrict) {
+        alert("Please fill in all form fields!");
+      } else {
+        this.$router.push({
+          name: "DistrictPage",
+          params: {
+            stateAndDistrict: formatDistrict(
+              this.formState.abbreviation,
+              this.formDistrict
+            ),
+            runningFor: "house"
+          }
+        });
+      }
     }
   }
 };
@@ -65,6 +70,12 @@ export default {
 <style lang="scss" scoped>
 .home {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+h1 {
+  margin: 0;
 }
 </style>
 
@@ -73,9 +84,11 @@ export default {
   display: flex;
   width: max-content;
   margin: 0 auto;
+  flex-wrap: wrap;
 
-  > *:not(:last-child) {
-    margin-right: 1em;
+  > * {
+    margin: 0.5em;
+    flex-grow: 1;
   }
 
   .district-number-input,
@@ -88,8 +101,12 @@ export default {
     background: hsl(210, 29%, 90%);
   }
 
-  .vs__dropdown-toggle {
+  .v-select {
     width: 20em;
+  }
+
+  .vs__dropdown-toggle {
+    width: 100%;
   }
 
   .vs__dropdown-menu {
@@ -120,6 +137,17 @@ export default {
   .vs__fade-enter-active,
   .vs__fade-leave-active {
     transition: none;
+  }
+
+  button[type="submit"] {
+    width: 100%;
+    padding: 1rem;
+    font: inherit;
+    border-radius: 5px;
+    border: none;
+    background: hsl(203, 89%, 53%);
+    color: white;
+    cursor: pointer;
   }
 }
 </style>
