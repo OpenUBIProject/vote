@@ -1,10 +1,6 @@
 <template>
   <div id="app">
-    <a
-      class="open-ubi-banner"
-      href="https://us.openubiproject.org"
-      v-if="host !== `us.openubiproject.org`"
-    >
+    <a class="open-ubi-banner" href="https://us.openubiproject.org">
       <div class="open-ubi-banner-inner">
         <img
           src="https://support.us.openubiproject.org/img/>=.svg"
@@ -32,6 +28,10 @@ html {
   html {
     font-family: "Inter var", sans-serif;
   }
+}
+.state-abbrev {
+  /* Dinstinguish capital Is in state abbreviations */
+  font-feature-settings: "ss02";
 }
 
 * {

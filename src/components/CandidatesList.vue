@@ -9,6 +9,7 @@
         <th>Green New Deal</th>
         <th>Medicare for All</th>
         <th>$15 Minimum Wage (or better)</th>
+        <th>Links</th>
       </tr>
     </thead>
     <tbody>
@@ -24,22 +25,14 @@
 
 <script>
 import CandidateRow from "@/components/CandidateRow.vue";
-import presidentialCandidates from "@/president.json";
-import senateCandidates from "@/senate.json";
-import houseCandidates from "@/house.json";
 
 export default {
   name: "CandidatesList",
   components: {
     CandidateRow
   },
-  computed: {
-    candidates() {
-      return presidentialCandidates
-        .concat(senateCandidates)
-        .concat(houseCandidates)
-        .filter(c => c.UBI !== "");
-    }
+  props: {
+    candidates: Array
   }
 };
 </script>
@@ -77,7 +70,7 @@ a {
 
   tr {
     display: grid;
-    grid-template-columns: 200px 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 2.5fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
     justify-content: center;
     align-items: center;
     width: 100%;
