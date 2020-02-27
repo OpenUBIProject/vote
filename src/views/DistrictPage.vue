@@ -5,14 +5,30 @@
       <span class="text-bit">Candidates who you can vote for in</span>&nbsp;
       <span class="state-abbrev">{{ state }}</span
       >-{{ padWithZeroes(district, 2) }}
+      <button @click="$router.push('/')" style="float:right">
+        Choose another district
+      </button>
     </h1>
     <!-- <h2>And what they support</h2> -->
     <div class="tabs">
-      <button @click="changeRunningFor('president')">
+      <button
+        :class="$route.params.runningFor === 'president' ? 'current' : ''"
+        @click="changeRunningFor('president')"
+      >
         President
       </button>
-      <button @click="changeRunningFor('senate')">Senate</button>
-      <button @click="changeRunningFor('house')">House</button>
+      <button
+        :class="$route.params.runningFor === 'senate' ? 'current' : ''"
+        @click="changeRunningFor('senate')"
+      >
+        Senate
+      </button>
+      <button
+        :class="$route.params.runningFor === 'house' ? 'current' : ''"
+        @click="changeRunningFor('house')"
+      >
+        House
+      </button>
     </div>
     <CandidatesList :candidates="candidates" />
   </div>
@@ -129,5 +145,44 @@ h2 {
   margin-top: 0.5rem;
   font-weight: 500;
   font-size: 1.2em;
+}
+.tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 10px;
+  margin-bottom: 2em;
+
+  button {
+    border: none;
+    font: inherit;
+    padding: 0.5em 0.75em;
+    border-radius: 5px;
+    border: 1px solid hsl(208, 29%, 90%);
+    background: hsl(200, 27%, 98%);
+    color: inherit;
+    cursor: pointer;
+
+    &:focus {
+      outline: none;
+      // box-shadow: inset 0 0 0 1px hsl(210, 30%, 82%);
+    }
+
+    &.current {
+      box-shadow: none;
+      // &:nth-child(1) {
+      //   background: hsl(210, 29%, 24%);
+      //   color: white;
+      // }
+      // &:nth-child(2) {
+      //   background: hsl(203, 89%, 53%);
+      //   color: white;
+      // }
+      // &:nth-child(3) {
+      //   background: hsl(0, 100%, 69%);
+      //   color: white;
+      // }
+      background: hsl(208, 29%, 90%);
+    }
+  }
 }
 </style>
