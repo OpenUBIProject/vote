@@ -48,7 +48,11 @@ export default {
   },
   methods: {
     goToDistrict() {
-      if (!this.formState.abbreviation || !this.formDistrict) {
+      if (
+        !this.formState ||
+        !this.formState.abbreviation ||
+        !this.formDistrict
+      ) {
         alert("Please fill in all form fields!");
       } else {
         this.$router.push({
@@ -148,6 +152,16 @@ h1 {
     background: hsl(203, 89%, 53%);
     color: white;
     cursor: pointer;
+    &:hover {
+      background: hsl(203, 89%, 50%);
+    }
+    &:active {
+      background: hsl(203, 89%, 47%);
+    }
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px hsl(203, 89%, 80%);
+    }
   }
 }
 </style>
