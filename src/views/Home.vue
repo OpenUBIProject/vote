@@ -20,6 +20,9 @@
         type="number"
         v-model="formDistrict"
         placeholder="District number"
+        required
+        min="1"
+        max="60"
       />
       <button type="submit">Go →</button>
     </form>
