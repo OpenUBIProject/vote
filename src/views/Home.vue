@@ -12,6 +12,8 @@
       <v-select
         :options="dropdownOptions"
         label="full"
+        :clearable="false"
+        :reduce="option => option.abbreviation"
         v-model="formState"
         placeholder="State"
       />
@@ -51,20 +53,13 @@ export default {
   },
   methods: {
     goToDistrict() {
-      if (
-        !this.formState ||
-        !this.formState.abbreviation ||
-        !this.formDistrict
-      ) {
+      if (!this.formState || !this.formDistrict) {
         alert("Please fill in all form fields!");
       } else {
         this.$router.push({
           name: "DistrictPage",
           params: {
-            stateAndDistrict: formatDistrict(
-              this.formState.abbreviation,
-              this.formDistrict
-            ),
+            stateAndDistrict: formatDistrict(this.formState, this.formDistrict),
             runningFor: "house"
           }
         });
