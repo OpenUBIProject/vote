@@ -1,7 +1,6 @@
 export default {
   computed: {
     state() {
-      console.log(this.$route);
       const state = this.$route.params.stateAndDistrict.replace(
         /[^A-Za-z]/g,
         ``
