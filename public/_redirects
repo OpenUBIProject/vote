@@ -1,0 +1,2 @@
+# Make all paths resolve to Vue code so Vue Router can do its thing
+/* / 200
