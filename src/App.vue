@@ -19,7 +19,9 @@
   </div>
 </template>
 
-<style>
+<style lang="scss">
+@import "vue-select/src/scss/vue-select.scss";
+
 @import url("https://rsms.me/inter/inter.css");
 html {
   font-family: "Inter", sans-serif;

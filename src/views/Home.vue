@@ -1,133 +1,125 @@
 <template>
   <div class="home">
-    <!-- <img alt="Vue logo" src="../assets/logo.png" /> -->
-    <h1>
-      <span class="text-bit">Candidates who you can vote for in</span>&nbsp;
-      <span class="state-abbrev">{{ state }}</span
-      >-{{ padWithZeroes(district, 2) }}
-    </h1>
-    <!-- <h2>And what they support</h2> -->
-    <div class="tabs">
-      <button @click="changeRunningFor('president')">
-        President
-      </button>
-      <button @click="changeRunningFor('senate')">Senate</button>
-      <button @click="changeRunningFor('house')">House</button>
-    </div>
-    <CandidatesList :candidates="candidates" />
+    <h1>Vote UBI</h1>
+    <form
+      class="district-chooser"
+      @submit="
+        $event.preventDefault();
+        goToDistrict();
+      "
+    >
+      <v-select
+        :options="dropdownOptions"
+        label="full"
+        v-model="formState"
+        placeholder="State"
+      />
+      <input
+        class="district-number-input"
+        type="number"
+        v-model="formDistrict"
+        placeholder="District number"
+      />
+      <button>Go</button>
+    </form>
   </div>
 </template>
 
 <script>
-import CandidatesList from "@/components/CandidatesList.vue";
-
-import presidentialCandidates from "@/president.json";
-import senateCandidates from "@/senate.json";
-import houseCandidates from "@/house.json";
-
+import { formatDistrict } from "@/helperFunctions.js";
 import states from "@/states.json";
 
-import parsePathMixin from "@/mixins/parsePath";
-
-import { padWithZeroes } from "@/helperFunctions";
-
 export default {
-  name: "CandidatesPage",
-  components: {
-    CandidatesList
+  name: "Home",
+  data() {
+    return {
+      formState: "",
+      formDistrict: ""
+    };
   },
-  mixins: [parsePathMixin],
   computed: {
-    stateName() {
-      return states[this.state];
-    },
-    candidates() {
-      switch (this.$route.params.runningFor) {
-        case "house":
-          return this.houseCandidates;
-        case "senate":
-          return this.senateCandidates;
-      }
-      return this.presidentialCandidates;
-    },
-    presidentialCandidates() {
-      return presidentialCandidates.sort(this.candidateSortingFunction);
-    },
-    senateCandidates() {
-      return senateCandidates
-        .filter(candidate => candidate.state === this.state)
-        .sort(this.candidateSortingFunction);
-    },
-    houseCandidates() {
-      return houseCandidates
-        .filter(candidate => candidate.state === this.state)
-        .filter(
-          candidate =>
-            candidate.state === this.state &&
-            this.bestDistrictToNumber(candidate["Best DIST"]) === this.district
-        )
-        .sort(this.candidateSortingFunction);
+    dropdownOptions() {
+      return Object.keys(states).map(abbreviation => ({
+        abbreviation: abbreviation,
+        full: states[abbreviation]
+      }));
     }
   },
   methods: {
-    padWithZeroes,
-    bestDistrictToNumber(bestDistrict) {
-      return Number(bestDistrict.replace(/[^0-9]/g, ""));
-    },
-    candidateSortingFunction(candidate1, candidate2) {
-      // First priority: Are they still running?
-      let toReturn = candidate1["Suspended"] - candidate2["Suspended"];
-
-      // Second priority: Are they in the UBI Caucus?
-      if (toReturn === 0) {
-        toReturn = candidate2["UBI"] - candidate1["UBI"];
-      }
-
-      // Third priority: How many policies do they support?
-      if (toReturn === 0) {
-        const boolFields = ["UBI", "No Corp", "C4A", "GND", "M4A", "15MIN"];
-
-        const candidate1Total = boolFields
-          .map(field => Number(candidate1[field]))
-          .reduce((a, b) => a + b);
-
-        const candidate2Total = boolFields
-          .map(field => Number(candidate2[field]))
-          .reduce((a, b) => a + b);
-
-        toReturn = candidate2Total - candidate1Total;
-      }
-
-      // Fourth priority: Do they have a website link?
-      if (toReturn === 0) {
-        const candidate1Website = candidate1["Best Website"] ? 1 : 0;
-        const candidate2Website = candidate2["Best Website"] ? 1 : 0;
-        toReturn = candidate2Website - candidate1Website;
-      }
-
-      // Fifth priority: Do they have a Twitter link?
-      if (toReturn === 0) {
-        const candidate1Twitter = candidate1["Twitter"] ? 1 : 0;
-        const candidate2Twitter = candidate2["Twitter"] ? 1 : 0;
-        toReturn = candidate2Twitter - candidate1Twitter;
-      }
-
-      return toReturn;
+    goToDistrict() {
+      this.$router.push({
+        name: "DistrictPage",
+        params: {
+          stateAndDistrict: formatDistrict(
+            this.formState.abbreviation,
+            this.formDistrict
+          ),
+          runningFor: "house"
+        }
+      });
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
-h1 {
-  // margin-bottom: 0;
-  .text-bit {
-    opacity: 0.7;
-  }
+.home {
+  text-align: center;
 }
-h2 {
-  margin-top: 0.5rem;
-  font-weight: 500;
-  font-size: 1.2em;
+</style>
+
+<style lang="scss">
+.district-chooser {
+  display: flex;
+  width: max-content;
+  margin: 0 auto;
+
+  > *:not(:last-child) {
+    margin-right: 1em;
+  }
+
+  .district-number-input,
+  .vs__dropdown-toggle,
+  .vs__dropdown-menu {
+    padding: 1rem;
+    border: none;
+    font-size: 1em;
+    border-radius: 5px;
+    background: hsl(210, 29%, 90%);
+  }
+
+  .vs__dropdown-toggle {
+    width: 20em;
+  }
+
+  .vs__dropdown-menu {
+    padding: 0.5em 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    box-shadow: none;
+  }
+
+  .district-number-input::placeholder,
+  .vs__search::placeholder {
+    color: inherit;
+    opacity: 0.5;
+  }
+
+  .district-number-input:focus,
+  .v-select.vs--open .vs__dropdown-toggle,
+  .vs__dropdown-menu {
+    outline: none;
+    box-shadow: inset 0 0 0 1px hsl(210, 29%, 85%);
+  }
+
+  .v-select.vs--open .vs__dropdown-toggle {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .vs__fade-enter-active,
+  .vs__fade-leave-active {
+    transition: none;
+  }
 }
 </style>

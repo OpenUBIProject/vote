@@ -11,6 +11,10 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 library.add(faTwitter, faGlobe);
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 
+// Vue Select
+import vSelect from "vue-select";
+Vue.component("v-select", vSelect);
+
 Vue.config.productionTip = false;
 
 new Vue({
