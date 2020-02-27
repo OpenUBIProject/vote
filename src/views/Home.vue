@@ -103,10 +103,15 @@ h1 {
     font-size: 1em;
     border-radius: 5px;
     background: hsl(210, 29%, 90%);
+    // width: 100%;
   }
 
   .v-select {
-    width: 20em;
+    min-width: 20em;
+  }
+
+  .district-number-input {
+    min-width: 7em;
   }
 
   .vs__dropdown-toggle {
