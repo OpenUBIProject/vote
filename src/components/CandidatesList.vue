@@ -69,7 +69,8 @@ a {
   }
 
   table,
-  tbody {
+  tbody,
+  thead {
     display: block;
     width: 100%;
   }
@@ -84,10 +85,6 @@ a {
     &:last-child td {
       border-bottom-style: none;
     }
-  }
-
-  thead tr {
-    margin-bottom: -2px;
   }
 
   td,
