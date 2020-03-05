@@ -15,17 +15,25 @@
       <tbody>
         <CandidateRow
           class="row"
-          v-for="candidate of candidates"
+          v-for="candidate of slicedCandidates"
           :key="candidate['Best Name']"
           :candidate="candidate"
         />
       </tbody>
+      <button
+        v-if="candidates.length > maxResults"
+        @click="maxResults += PAGE_SIZE"
+      >
+        Show More
+      </button>
     </table>
   </div>
 </template>
 
 <script>
 import CandidateRow from "@/components/CandidateRow.vue";
+
+const PAGE_SIZE = 50;
 
 export default {
   name: "CandidatesList",
@@ -34,6 +42,18 @@ export default {
   },
   props: {
     candidates: Array
+  },
+  data() {
+    return {
+      maxResults: PAGE_SIZE,
+      PAGE_SIZE
+    };
+  },
+  computed: {
+    slicedCandidates() {
+      // console.log("Calculating slicedCandidates");
+      return this.candidates.slice(0, this.maxResults);
+    }
   }
 };
 </script>
