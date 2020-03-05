@@ -48,10 +48,17 @@ export default {
       if (transformedSearch < 1) {
         return false;
       }
-      return candidate["Candidate Keywords"]
+      const keywords = candidate["Candidate Keywords"]
+        .replace(/([A-Z][A-Z])-([0-9][0-9])/g, "$1 $2")
         .split(" ")
-        .map(this.transformForSearch)
-        .includes(transformedSearch);
+        .map(this.transformForSearch);
+
+      console.log({ keywords });
+
+      return keywords.includes(transformedSearch);
+      // return this.transformForSearch(candidate["Candidate Keywords"]).includes(
+      //   transformedSearch
+      // );
     },
     transformForSearch(string) {
       return string

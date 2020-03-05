@@ -14,6 +14,7 @@
           {{ candidate["Best Name"] }}
         </div>
         <div class="running-for">{{ partyName }}</div>
+        <div class="running-for">Running in {{ candidate["Best DIST"] }}</div>
         <div
           class="no-longer-running-pill"
           v-if="candidate['Suspended'] === '1'"
