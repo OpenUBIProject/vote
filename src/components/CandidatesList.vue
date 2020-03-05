@@ -1,5 +1,8 @@
 <template>
-  <div class="candidates-list-wrapper">
+  <div v-if="candidates.length === 0" class="empty-placeholder">
+    ⚠&nbsp;&nbsp;No actively running candidates found
+  </div>
+  <div v-else class="candidates-list-wrapper">
     <table class="candidates-list">
       <thead>
         <tr>
@@ -38,28 +41,24 @@ export default {
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-h3 {
-  margin: 40px 0 0;
+.candidates-list-wrapper {
+  overflow-x: auto;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
+
+.empty-placeholder {
+  text-align: center;
+  font-size: 1.1em;
+  opacity: 0.5;
+  // color: hsl(210, 29%, 80%);
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>
 
 <style lang="scss">
-.candidates-list-wrapper {
-  overflow-x: auto;
-}
 .candidates-list {
   min-width: 957px;
 

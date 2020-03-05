@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div :class="['home', notSearchedYet ? 'not-searched-yet' : '']">
     <h1>Vote UBI</h1>
 
     <input
@@ -9,8 +9,9 @@
       v-model="search"
       placeholder="Search by name, state or district"
       autocomplete="off"
+      @input="notSearchedYet = false"
     />
-    <CandidatesList :candidates="candidates" />
+    <CandidatesList v-if="!notSearchedYet" :candidates="candidates" />
   </div>
 </template>
 
@@ -35,7 +36,8 @@ export default {
   },
   data() {
     return {
-      search: ""
+      search: "",
+      notSearchedYet: true
     };
   },
   methods: {
@@ -121,6 +123,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.home {
+  display: flex;
+  flex-direction: column;
+  &.not-searched-yet {
+    justify-content: center;
+  }
+}
 h1 {
   // margin-bottom: 0;
   .text-bit {
