@@ -11,7 +11,11 @@
       autocomplete="off"
       @input="notSearchedYet = false"
     />
-    <CandidatesList v-if="!notSearchedYet" :candidates="candidates" />
+    <div v-if="notSearchedYet /* || search.length === 0*/"></div>
+    <div v-else-if="candidates.length === 0" class="empty-placeholder">
+      ⚠&nbsp;&nbsp;No actively running candidates found
+    </div>
+    <CandidatesList v-else :candidates="candidates" />
   </div>
 </template>
 
@@ -157,5 +161,16 @@ h2 {
     outline: none;
     box-shadow: inset 0 0 0 1px hsl(210, 29%, 85%);
   }
+}
+
+.empty-placeholder {
+  text-align: center;
+  font-size: 1.1em;
+  opacity: 0.5;
+  // color: hsl(210, 29%, 80%);
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>
