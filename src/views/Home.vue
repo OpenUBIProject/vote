@@ -7,7 +7,7 @@
       type="text"
       class="search"
       v-model="search"
-      placeholder="Search by name, state or district"
+      placeholder="Search by name, state, district or house/senate/president"
       autocomplete="off"
       @input="notSearchedYet = false"
     />
@@ -50,21 +50,26 @@ export default {
       return Number(bestDistrict.replace(/[^0-9]/g, ""));
     },
     candidateFilteringFunction(candidate) {
-      const transformedSearch = this.transformForSearch(this.search);
-      if (transformedSearch < 1) {
-        return false;
-      }
-      const keywords = candidate["Candidate Keywords"]
+      // const start = performance.now();
+      const searchKeywords = this.search
+        .split(" ")
+        .map(this.transformForSearch);
+      const candidateKeywords = candidate["Candidate Keywords"]
         .replace(/([A-Z][A-Z])-([0-9][0-9])/g, "$1 $2")
         .split(" ")
         .map(this.transformForSearch);
 
-      // console.log({ keywords });
-
-      return keywords.includes(transformedSearch);
-      // return this.transformForSearch(candidate["Candidate Keywords"]).includes(
-      //   transformedSearch
+      const shouldDisplay = searchKeywords.every(searchKeyword =>
+        candidateKeywords.includes(searchKeyword)
+      );
+      // console.log(
+      //   "Returned",
+      //   shouldDisplay,
+      //   "in",
+      //   performance.now() - start,
+      //   "ms"
       // );
+      return shouldDisplay;
     },
     transformForSearch(string) {
       return string
