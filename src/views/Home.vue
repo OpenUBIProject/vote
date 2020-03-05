@@ -34,6 +34,9 @@ import candidates from "@/candidates.json";
 
 import { padWithZeroes } from "@/helperFunctions";
 
+const initialSearchString =
+  new URLSearchParams(window.location.search).get("q") || "";
+
 export default {
   name: "CandidatesPage",
   components: {
@@ -48,8 +51,8 @@ export default {
   },
   data() {
     return {
-      search: "",
-      notSearchedYet: true
+      search: initialSearchString,
+      notSearchedYet: initialSearchString === ""
     };
   },
   methods: {
