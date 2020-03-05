@@ -63,6 +63,9 @@ export default {
         .split(" ")
         .map(this.transformForSearch)
         .filter(string => string.length > 0);
+
+      if (searchKeywords.length === 0) return false;
+
       const candidateKeywords = candidate["Candidate Keywords"]
         .replace(/([A-Z][A-Z])-([0-9][0-9])/g, "$1 $2")
         .split(" ")
