@@ -74,7 +74,7 @@ export default {
       const shouldDisplay = searchKeywords.every(
         searchKeyword =>
           !!candidateKeywords.find(candidateKeyword =>
-            candidateKeyword.includes(searchKeyword)
+            candidateKeyword.startsWith(searchKeyword)
           )
       );
       // console.log(
