@@ -1,25 +1,27 @@
 <template>
-  <table class="candidates-list">
-    <thead>
-      <tr>
-        <th class="name-th"><span>Name</span></th>
-        <th>UBI Caucus Member</th>
-        <th>No Corporate PAC Money</th>
-        <th>Public College for All</th>
-        <th>Green New Deal</th>
-        <th>Medicare for All</th>
-        <th>Links</th>
-      </tr>
-    </thead>
-    <tbody>
-      <CandidateRow
-        class="row"
-        v-for="candidate of candidates"
-        :key="candidate['Best Name']"
-        :candidate="candidate"
-      />
-    </tbody>
-  </table>
+  <div class="candidates-list-wrapper">
+    <table class="candidates-list">
+      <thead>
+        <tr>
+          <th class="name-th"><span>Name</span></th>
+          <th>UBI Caucus Member</th>
+          <th>No Corporate PAC Money</th>
+          <th>Public College for All</th>
+          <th>Green New Deal</th>
+          <th>Medicare for All</th>
+          <th>Links</th>
+        </tr>
+      </thead>
+      <tbody>
+        <CandidateRow
+          class="row"
+          v-for="candidate of candidates"
+          :key="candidate['Best Name']"
+          :candidate="candidate"
+        />
+      </tbody>
+    </table>
+  </div>
 </template>
 
 <script>
@@ -55,7 +57,12 @@ a {
 </style>
 
 <style lang="scss">
+.candidates-list-wrapper {
+  overflow-x: auto;
+}
 .candidates-list {
+  min-width: 957px;
+
   table * {
     display: block;
   }
