@@ -53,7 +53,7 @@ export default {
         .split(" ")
         .map(this.transformForSearch);
 
-      console.log({ keywords });
+      // console.log({ keywords });
 
       return keywords.includes(transformedSearch);
       // return this.transformForSearch(candidate["Candidate Keywords"]).includes(
@@ -110,7 +110,7 @@ export default {
         toReturn = candidate2Twitter - candidate1Twitter;
       }
 
-      console.log("candidateSortingFunction", toReturn);
+      // console.log("candidateSortingFunction", toReturn);
       return toReturn;
     },
     boolCellToNum(cellString) {
