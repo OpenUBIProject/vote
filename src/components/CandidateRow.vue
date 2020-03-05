@@ -27,7 +27,6 @@
     <BoolCell :field="candidate['C4A']" />
     <BoolCell :field="candidate['GND']" />
     <BoolCell :field="candidate['M4A']" />
-    <BoolCell :field="candidate['15MIN']" />
     <td class="learn-more-cell">
       <a :class="twitterUrl ? `` : `hidden`" :href="twitterUrl" target="_blank">
         <font-awesome-icon :icon="['fab', 'twitter']" />
@@ -115,12 +114,14 @@ img {
 }
 
 .learn-more-cell {
+  flex-wrap: wrap;
   a {
     color: inherit;
-    margin: 0 0.25em;
+    margin: 0.25em;
     background: hsl(208, 29%, 90%);
     width: 2em;
     height: 2em;
+    flex-shrink: 0;
     display: flex;
     justify-content: center;
     align-items: center;

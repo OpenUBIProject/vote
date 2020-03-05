@@ -6,6 +6,7 @@ node_modules
 /src/president.json
 /src/senate.json
 /src/house.json
+/src/candidates.json
 
 # local env files
 .env

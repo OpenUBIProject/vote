@@ -1,7 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
-import DistrictPage from "../views/DistrictPage.vue";
 
 Vue.use(VueRouter);
 
@@ -10,11 +9,6 @@ const routes = [
     path: "/",
     name: "Home",
     component: Home
-  },
-  {
-    path: "/:stateAndDistrict/:runningFor",
-    name: "DistrictPage",
-    component: DistrictPage
   },
   {
     path: "/about",
