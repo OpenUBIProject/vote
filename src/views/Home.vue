@@ -71,8 +71,11 @@ export default {
         .split(" ")
         .map(this.transformForSearch);
 
-      const shouldDisplay = searchKeywords.every(searchKeyword =>
-        candidateKeywords.includes(searchKeyword)
+      const shouldDisplay = searchKeywords.every(
+        searchKeyword =>
+          !!candidateKeywords.find(candidateKeyword =>
+            candidateKeyword.includes(searchKeyword)
+          )
       );
       // console.log(
       //   "Returned",
