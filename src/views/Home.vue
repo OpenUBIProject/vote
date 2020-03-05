@@ -1,7 +1,15 @@
 <template>
   <div :class="['home', notSearchedYet ? 'not-searched-yet' : '']">
     <h1>Vote UBI</h1>
-
+    <p class="description">
+      Some text about Vote UBI. Lots of words are good for testing things. Lots
+      of words are good for testing things. Lots of words are good for testing
+      things. Lots of words are good for testing things. Lots of words are good
+      for testing things. Lots of words are good for testing things. Lots of
+      words are good for testing things. Lots of words are good for testing
+      things. Lots of words are good for testing things. Lots of words are good
+      for testing things.
+    </p>
     <input
       id="search"
       type="text"
@@ -141,7 +149,7 @@ export default {
   }
 }
 h1 {
-  // margin-bottom: 0;
+  margin-bottom: 0;
   .text-bit {
     opacity: 0.7;
   }
@@ -150,6 +158,9 @@ h2 {
   margin-top: 0.5rem;
   font-weight: 500;
   font-size: 1.2em;
+}
+.description {
+  margin-bottom: 2em;
 }
 .search {
   margin-bottom: 2rem;
