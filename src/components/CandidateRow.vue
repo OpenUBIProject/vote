@@ -28,6 +28,7 @@
     <BoolCell :field="candidate['C4A']" />
     <BoolCell :field="candidate['GND']" />
     <BoolCell :field="candidate['M4A']" />
+    <BoolCell :field="candidate['15MIN']" />
     <td class="learn-more-cell">
       <a :class="twitterUrl ? `` : `hidden`" :href="twitterUrl" target="_blank">
         <font-awesome-icon :icon="['fab', 'twitter']" />

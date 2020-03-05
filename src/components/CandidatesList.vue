@@ -9,6 +9,7 @@
           <th>Public College for All</th>
           <th>Green New Deal</th>
           <th>Medicare for All</th>
+          <th>$15 Minimum Wage (or better)</th>
           <th>Links</th>
         </tr>
       </thead>
@@ -81,7 +82,7 @@ export default {
 
   tr {
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 2.5fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
     justify-content: center;
     align-items: center;
     width: 100%;
