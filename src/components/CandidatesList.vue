@@ -17,7 +17,7 @@
         <CandidateRow
           class="row"
           v-for="candidate of slicedCandidates"
-          :key="candidate['Best Name']"
+          :key="candidate['_candidate_id']"
           :candidate="candidate"
         />
       </tbody>
